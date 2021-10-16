@@ -11,6 +11,7 @@ divisions of this.
 
 # TODO
 
+* Add GL deps to enable `Processing.P3D` mode.
 * Make `theta` divisions explicitly integral - so that epicycles always
   complete neatly on the master loop for seamlessness.
 * Have a warm-up loop length so lingering artifacts get a chance to 
