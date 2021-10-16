@@ -31,7 +31,7 @@ public class Oscillatorz extends MainBase {
 
     @Override
     public void settings() {
-        size(720, 1280);
+        size(TIKTOK_WIDTH, TIKTOK_HEIGHT);
         //  size(1920, 1005, P3D);
         //  fullScreen(P3D);
 //        pixelDensity(2);
