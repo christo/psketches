@@ -11,7 +11,8 @@ divisions of this.
 
 # TODO
 
-* Make `theta` divisions explicitly integral
+* Make `theta` divisions explicitly integral - so that epicycles always
+  complete neatly on the master loop for seamlessness.
 * Have a warm-up loop length so lingering artifacts get a chance to 
   stabilise such that the looped clip is seamless (requires some 
   experimentation and testing.)
