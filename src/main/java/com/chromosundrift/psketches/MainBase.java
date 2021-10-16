@@ -9,7 +9,4 @@ public class MainBase extends PApplet {
     public static int TIKTOK_WIDTH = 720;
     public static int TIKTOK_HEIGHT = 1280;
 
-    public static void main(String[] args) {
-
-    }
 }
