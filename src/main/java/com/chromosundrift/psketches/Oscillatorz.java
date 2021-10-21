@@ -1,13 +1,11 @@
 package com.chromosundrift.psketches;
 
-import java.util.List;
-import java.util.ArrayList;
 //import com.hamoid.VideoExport;
 
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Oscillatorz extends MainBase {
+public class Oscillatorz extends LooperBase {
 
 
     int w, h;
@@ -38,8 +36,6 @@ public class Oscillatorz extends MainBase {
     }
 
     public void setup() {
-
-
 
         smooth();
         if (SHOW_IMAGE) {
@@ -123,6 +119,7 @@ public class Oscillatorz extends MainBase {
     }
 
     public void keyPressed() {
+        super.keyPressed();
         if (key == 'q') {
 //            if (DO_VIDEO_EXPORT) {
 //                videoExport.endMovie();
