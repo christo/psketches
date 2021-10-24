@@ -2,11 +2,14 @@ package com.chromosundrift.psketches;
 
 import processing.core.PApplet;
 
+import java.io.IOException;
+
 abstract public class LooperBase extends PApplet {
 
     public static final int MARGIN = 20;
     public static int DEFAULT_FPS = 60;
-    public static int DEFAULT_DURATION_S = 14;
+    public static int DEFAULT_DURATION_S = 120;
+    public static int DEFAULT_REVOLUTIONS = 26;
     public static int TIKTOK_WIDTH = 720;
     public static int TIKTOK_HEIGHT = 1280;
 
@@ -18,22 +21,30 @@ abstract public class LooperBase extends PApplet {
     private int durationSeconds;
     private int frameRate;
     private boolean drawDebug = false;
+    private VideoExporter videoExporter;
+    private int revolutions;
 
     @Override
     public void settings() {
         size(TIKTOK_WIDTH, TIKTOK_HEIGHT);
         smooth();
-        init();
     }
 
-    public void init(int durationSeconds, int frameRate) {
+    public void init(int durationSeconds, int frameRate, int revolutions) {
         this.durationSeconds = durationSeconds;
         this.frameRate = frameRate;
-        this.delta = TWO_PI / (durationSeconds * DEFAULT_FPS);
+        this.revolutions = revolutions;
+        this.delta = (TWO_PI * revolutions) / (durationSeconds * frameRate);
+        try {
+            this.videoExporter = new VideoExporter(width, height, this.frameRate);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     public void init() {
-        init(DEFAULT_DURATION_S, DEFAULT_FPS);
+        init(DEFAULT_DURATION_S, DEFAULT_FPS, DEFAULT_REVOLUTIONS);
     }
 
     private void debugTextStyle() {
@@ -70,7 +81,6 @@ abstract public class LooperBase extends PApplet {
         }
     }
 
-
     /**
      * After all drawing work has been done, subclasses must call this.
      */
@@ -78,13 +88,48 @@ abstract public class LooperBase extends PApplet {
         if (drawDebug) {
             drawFrameCounter();
             drawSeconds();
+            drawTheta();
+        }
+        try {
+            videoExporter.writeFrame(this.get());
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
         }
         theta += delta;
-        elapsedSeconds = frameNum / DEFAULT_FPS;
+        elapsedSeconds = (float)frameNum / this.frameRate;
+        if (elapsedSeconds >= this.durationSeconds) {
+            try {
+                videoExporter.end();
+            } catch (IOException e) {
+                System.out.println("problem ending video, exiting anyway");
+                e.printStackTrace();
+                System.exit(2);
+            }
+            System.exit(0);
+        }
         frameNum++;
+    }
+
+    private void drawTheta() {
+        stroke(255);
+        strokeWeight(2);
+        pushMatrix();
+        translate(width/2, height/2);
+        rotate(theta);
+        line(0, 0, max(width, height) * 2, 0);
+        popMatrix();
     }
 
     public final float getTheta() {
         return theta;
+    }
+
+    public void dispose() {
+        try {
+            videoExporter.end();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -11,7 +11,9 @@ public class Oscillatorz extends LooperBase {
     int w, h;
     float t;
 
-    final boolean DO_VIDEO_EXPORT = false;
+    final static int INVITE_WIDTH = 1920;
+    final static int INVITE_HEIGHT = 1005;
+
     final float DELTA_TIME = 0.0002f;
     final boolean SHOW_IMAGE = false;
     final boolean FIXED_ALPHA = true;
@@ -24,16 +26,6 @@ public class Oscillatorz extends LooperBase {
 
     final double PI2 = Math.PI * 2;
     PImage img;
-    //VideoExport videoExport;
-
-
-    @Override
-    public void settings() {
-        size(TIKTOK_WIDTH, TIKTOK_HEIGHT);
-        //  size(1920, 1005, P3D);
-        //  fullScreen(P3D);
-//        pixelDensity(2);
-    }
 
     public void setup() {
 
@@ -52,14 +44,7 @@ public class Oscillatorz extends LooperBase {
 
         // start with fully opaque background colour
         background(16, 20, 53, 255);
-
         t = 0;
-
-//        if (DO_VIDEO_EXPORT) {
-//            videoExport = new VideoExport(this, "oscillatorz.mp4");
-//            videoExport.setFrameRate(30);
-//            videoExport.startMovie();
-//        }
     }
 
 

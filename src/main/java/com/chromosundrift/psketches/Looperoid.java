@@ -5,14 +5,23 @@ import processing.core.PApplet;
 public class Looperoid extends LooperBase {
 
     public static final float FADE_ALPHA = 15f;
+    public static final int REVOLUTIONS = 26;
+    public static final int DURATION = 120;
+    public static final int FPS = 60;
 
     public static void main(String[] args) {
         PApplet.main(Looperoid.class, args);
     }
 
+
+    @Override
+    public void settings() {
+        super.settings();
+        init(DURATION, FPS, REVOLUTIONS);
+    }
+
     @Override
     public void setup() {
-
         background(53, 20, 16, 255);
     }
 
@@ -22,7 +31,7 @@ public class Looperoid extends LooperBase {
         fill(53, 20, 16, FADE_ALPHA);
         rect(0, 0, width, height);
         stroke(255);
-        strokeWeight(7);
+        strokeWeight(8);
 
         int branches = 17;
         for (int i = 0; i < branches; i++) {
@@ -34,7 +43,7 @@ public class Looperoid extends LooperBase {
 
     private void circ(float ang) {
         float a = abs(sin(ang / 1.8f)) * min(width, height) / 3;
-        final int ma = (int) (ang * 7.9f);
+        final int ma = (int) (ang * 8f);
         int stripe = 64 * (ma % 2);
         stroke(255, 192 - stripe, 255);
         noFill();
