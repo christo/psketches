@@ -9,6 +9,34 @@ It should be easy to make seamlessly repeating loops by parametising
 by a trigonometric cycle of `2 * Pi` and supporting only ingegral
 divisions of this. 
 
+# Goals
+
+Generate animations, save to video file, integrate audio intended to
+loop harmoniously, automatic upload to social network platforms.
+
+# Status
+
+Pre-larval. A couple of animations will run and show in a window
+but not yet save or upload.
+
+Originally created in the Processing environment which used the 
+VideoExport library to write a video file successfully but this
+is currently not working outside Processing. The plan is to use
+gstreamer-java to do this in a standalone context.
+
+# Install
+
+* builds with `gradle`. Each animation is an application.
+* requires gstreamer binaries to be installed by system packager, e.g.
+MacOS: 
+```
+brew install gstreamer
+```
+* currenly only tested on MacOS but should work on Linux if GStreamer
+is in the path already. Probably won't work on Windows but if you want
+that let me know because it's should be easy. I just don't need it.  
+
+
 # TODO
 
 * Add GL deps to enable `Processing.P3D` mode.
