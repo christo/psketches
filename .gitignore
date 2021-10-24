@@ -1,2 +1,4 @@
 build
 .gradle
+ffmpeg.log
+video.out.m4v
