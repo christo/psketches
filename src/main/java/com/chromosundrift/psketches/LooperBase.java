@@ -84,7 +84,7 @@ abstract public class LooperBase extends PApplet {
         frameNum++;
     }
 
-    public float getTheta() {
+    public final float getTheta() {
         return theta;
     }
 }
